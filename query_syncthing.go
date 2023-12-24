@@ -2,11 +2,11 @@ package main
 
 import (
 	"crypto/tls"
+	"io/ioutil"
 	"log"
-	"time"
 	"net"
 	"net/http"
-	"io/ioutil"
+	"time"
 )
 
 func query_syncthing(url string) (string, error) {
@@ -27,7 +27,6 @@ func query_syncthing(url string) (string, error) {
 			ResponseHeaderTimeout: time.Second * 120,
 		},
 	}
-
 
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Set("X-API-Key", config.ApiKey)
