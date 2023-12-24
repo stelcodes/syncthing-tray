@@ -13,9 +13,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/alex2108/systray"
+	"github.com/getlantern/systray"
 	"github.com/toqueteos/webbrowser"
 )
+
 var VersionStr = "unknown"
 var BuildUnixTime = "0"
 
@@ -240,7 +241,7 @@ func setIcon(numConnected int, downloading, uploading bool) {
 
 func main() {
 	// must be done at the beginning
-	systray.Run(setupTray)
+	systray.Run(setupTray, exitTray)
 }
 
 type TrayEntries struct {
@@ -252,6 +253,11 @@ type TrayEntries struct {
 }
 
 var trayEntries TrayEntries
+
+func exitTray() {
+	fmt.Println("Quit now...")
+	os.Exit(0)
+}
 
 func setupTray() {
 	url := flag.String("target", "http://localhost:8384", "Target Syncthing instance")
